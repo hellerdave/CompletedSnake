@@ -30,13 +30,6 @@ public class ClassicSnake extends AppCompatActivity {
     private void musicOnOff() {
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("SnakePreferences", Context.MODE_PRIVATE);
         playMusic = preferences.getBoolean("PlayMusic", true);
-        musicPlayer = MediaPlayer.create(ClassicSnake.this, R.raw.music);
-        if(playMusic) {
-            musicPlayer.setLooping(true);
-            musicPlayer.start();
-        } else {
-            musicPlayer.stop();
-        }
     }
 
 
