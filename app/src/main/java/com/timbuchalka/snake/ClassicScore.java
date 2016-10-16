@@ -16,10 +16,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-
 public class ClassicScore extends AppCompatActivity {
 
     private TextView scoreTextView;
@@ -29,7 +25,6 @@ public class ClassicScore extends AppCompatActivity {
     private TextView gameOverTitleLeftTextView;
     private TextView gameOverTitleRightTextView;
     private TextView gameOverTitleMiddleTextView;
-    private AdView adView;
 
     private Animation animation;
 
@@ -44,15 +39,6 @@ public class ClassicScore extends AppCompatActivity {
             getSupportActionBar().hide();
         }
         RelativeLayout classicScoreLayout = (RelativeLayout) findViewById(R.id.classic_score_layout);
-
-        adView = new AdView(this);
-        adView.setAdSize(AdSize.SMART_BANNER);
-        adView.setAdUnitId(GameSettings.MY_AD_UNIT_ID);
-        classicScoreLayout.addView(adView);
-
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-//        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
 
         initTitle();
         initScore();

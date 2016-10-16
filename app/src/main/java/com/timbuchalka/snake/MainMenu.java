@@ -12,15 +12,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
 
 public class MainMenu extends AppCompatActivity {
 
     private RelativeLayout snakeLayout;
     private Animation compileAnim;
-    private AdView adView;
     private ImageView classicBtn;
     private ImageView noWallsBtn;
     private ImageView bombBtn;
@@ -42,15 +38,6 @@ public class MainMenu extends AppCompatActivity {
         if(getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-
-        adView = new AdView(this);
-        adView.setAdSize(AdSize.SMART_BANNER);
-        adView.setAdUnitId(GameSettings.MY_AD_UNIT_ID);
-        snakeLayout.addView(adView);
-
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-//        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
 
         initClassic();
         initNoWalls();
