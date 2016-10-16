@@ -12,10 +12,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+
 public class MainMenu extends AppCompatActivity {
 
     private RelativeLayout snakeLayout;
     private Animation compileAnim;
+    private AdView adView;
     private ImageView classicBtn;
     private ImageView noWallsBtn;
     private ImageView bombBtn;
@@ -37,6 +42,21 @@ public class MainMenu extends AppCompatActivity {
         if(getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
+        adView = new AdView(this);
+        adView.setAdSize(AdSize.SMART_BANNER);
+        adView.setAdUnitId(GameSettings.MY_AD_UNIT_ID);
+        snakeLayout.addView(adView);
+
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+//        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
+        initClassic();
+        initNoWalls();
+        initBomb();
+        initTitle();
+        initSettings();
     }
 
 
@@ -165,7 +185,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        titleMiddle.startAnimation(compileAnim);
+        titleLeft.startAnimation(compileAnim);
 
         // Set up animation for title middle
         compileAnim = AnimationUtils.loadAnimation(MainMenu.this, R.anim.back_anim_for_title_middle);
@@ -252,10 +272,10 @@ public class MainMenu extends AppCompatActivity {
                         Animation animationTitleLeft = AnimationUtils.loadAnimation(MainMenu.this, R.anim.anim_for_title_left);
                         animationTitleLeft.setDuration(GameSettings.ANIMATION_SHOW_TITLE_DURATION);
 
-                        Animation animationTitleMiddle = AnimationUtils.loadAnimation(MainMenu.this, R.anim.back_anim_for_title_middle);
+                        Animation animationTitleMiddle = AnimationUtils.loadAnimation(MainMenu.this, R.anim.anim_for_title_middle);
                         animationTitleMiddle.setDuration(GameSettings.ANIMATION_SHOW_TITLE_DURATION);
 
-                        Animation animationTitleRight = AnimationUtils.loadAnimation(MainMenu.this, R.anim.back_anim_for_title_right);
+                        Animation animationTitleRight = AnimationUtils.loadAnimation(MainMenu.this, R.anim.anim_for_title_right);
                         animationTitleRight.setDuration(GameSettings.ANIMATION_SHOW_TITLE_DURATION);
 
                         classicBtn.startAnimation(animation);
@@ -279,7 +299,6 @@ public class MainMenu extends AppCompatActivity {
                     }
                 });
 
-                settingsBtn.setAnimation(compileAnim);
             }
 
             @Override
@@ -287,6 +306,9 @@ public class MainMenu extends AppCompatActivity {
 
             }
         });
+        settingsBtn.setAnimation(compileAnim);
     }
-
+    @Override
+    public void onBackPressed() {
+    }
 }
